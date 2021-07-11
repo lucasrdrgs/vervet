@@ -1,0 +1,5 @@
+sentence,sentiment
+"I hate you!","bad"
+"I dislike you, stop being like that.",bad
+"Very good! Well done.",good
+"Congratulations on your new job, you deserve it!","good"
