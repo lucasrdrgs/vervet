@@ -132,11 +132,8 @@ pub fn read_csv(o CsvOptions) Dataframe {
 
 	mut k := u64(0)
 	mut n_rows := 0
-	mut last_byte_read := byte(0xA)
 	mut read_chunk_size := 1024
 	for rem_file_size > 0 {
-		last_byte_read = byte(0xA)
-
 		mut to_read := read_chunk_size
 		if to_read > rem_file_size {
 			to_read = int(rem_file_size)
@@ -147,14 +144,6 @@ pub fn read_csv(o CsvOptions) Dataframe {
 			if b == byte(0xA) { // newline \n
 				n_rows++
 			}
-			else if b == byte(0xD) {
-				continue
-			}
-			last_byte_read = b
-		}
-
-		if last_byte_read != byte(0xA) {
-			n_rows++
 		}
 
 		rem_file_size -= u64(to_read)
@@ -197,7 +186,7 @@ pub fn read_csv(o CsvOptions) Dataframe {
 	mut df := Dataframe{
 		n_chunks: n_chunks,
 		rows_chk: chk_sz,
-		num_rows: n_rows,
+		num_rows: n_rows - 1,
 		cur_chk: -1,
 		cur_byte: k,
 		file: fp,
