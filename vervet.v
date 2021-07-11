@@ -13,6 +13,7 @@ mut:
 	file_size	u64
 	options		CsvOptions
 pub:
+	num_rows	int
 	columns		[]string
 pub mut:
 	data		[][]string
@@ -196,6 +197,7 @@ pub fn read_csv(o CsvOptions) Dataframe {
 	mut df := Dataframe{
 		n_chunks: n_chunks,
 		rows_chk: chk_sz,
+		num_rows: n_rows,
 		cur_chk: -1,
 		cur_byte: k,
 		file: fp,
