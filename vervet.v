@@ -108,7 +108,8 @@ pub fn (df Dataframe) get_col(col string) []string {
 
 pub fn (df Dataframe) get_col_at(index int) []string {
 	mut to_return := []string{}
-	for row in df.data {
+	for i in 0..df.num_rows {
+		row := df.get_row_at(i)
 		to_return << row[index]
 	}
 	return to_return
