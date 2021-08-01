@@ -99,14 +99,14 @@ pub fn (mut df Dataframe) reset() {
 	df.next_chunk()
 }
 
-pub fn (df Dataframe) get_col(col string) []string {
+pub fn (mut df Dataframe) get_col(col string) []string {
 	if col !in df.columns {
 		panic('Column "$col" does not exist in the dataframe.')
 	}
 	return df.get_col_at(df.columns.index(col))
 }
 
-pub fn (df Dataframe) get_col_at(index int) []string {
+pub fn (mut df Dataframe) get_col_at(index int) []string {
 	mut to_return := []string{}
 	for i in 0..df.num_rows {
 		row := df.get_row_at(i)
